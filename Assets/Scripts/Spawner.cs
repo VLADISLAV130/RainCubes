@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
         StartCoroutine(SpawnCubeCoroutine());
     }
 
-    public void ReleaseCube(Cube cube)
+    private void ReleaseCube(Cube cube)
     {
         _pool.Release(cube);
     }
@@ -62,10 +62,12 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator SpawnCubeCoroutine()
     {
+        WaitForSeconds wait = new WaitForSeconds(_repeatRate);
+
         while (true)
         {
             _pool.Get();
-            yield return new WaitForSeconds(_repeatRate);
+            yield return wait;
         }
     }
 }

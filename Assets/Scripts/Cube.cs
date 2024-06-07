@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 using Random = UnityEngine.Random;
+using System.Runtime.InteropServices;
 
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(Rigidbody))]
@@ -43,7 +44,7 @@ public class Cube : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (_hasTouchedPlatform == false)
+        if (_hasTouchedPlatform == false && collision.gameObject.TryGetComponent(out Platform platform) == true)
         {
             _hasTouchedPlatform = true;
             _renderer.material.color = Random.ColorHSV();
